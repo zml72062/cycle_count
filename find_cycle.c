@@ -160,27 +160,16 @@ static long count_cycles(List** neighbor_list, long k, long node, long num_nodes
  *  @param num_nodes the number of nodes
  *  @param num_edges the number of edges
  *  @param k the cycle length
- * 
- *  @return a malloced array of "how many cycles pass each node"
+ *  @param cycle_list the array in which to store the cycle counts, in
+ *  shape [num_nodes, ]
  */
-long* graph_count_cycles(long* edge_index, long num_nodes, long num_edges, long k)
+void graph_count_cycles(long* edge_index, long num_nodes, long num_edges, long k,
+                        long* cycle_list)
 {
     List** neighbor_list = get_neighbor_list(edge_index, num_nodes, num_edges);
-    long* cycle_list = (long*)malloc(sizeof(long) * num_nodes);
     for (int i = 0; i < num_nodes; i++)
     {
         cycle_list[i] = count_cycles(neighbor_list, k, i, num_nodes);
     }
     free_neighbor_list(neighbor_list, num_nodes);
-    return cycle_list;
-}
-
-/**
- *  Free the array created by "graph_count_cycles".
- * 
- *  @param array the malloced array
- */
-void free_array(long* array)
-{
-    free(array);
 }
