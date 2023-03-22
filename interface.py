@@ -101,3 +101,7 @@ def count_tailed_triangles(edge_index: Union[np.ndarray, torch.LongTensor],
                    ctypes.c_long(num_edges), 
                    np.ctypeslib.as_ctypes(count), b'tt')
     return count
+
+# Utility function
+def get_name(func):
+    return str(func).split(' ')[1]
