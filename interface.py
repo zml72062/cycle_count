@@ -3,33 +3,6 @@ import numpy as np
 import ctypes
 from typing import Union
 
-################### Definition for C interfaces ################
-
-cycle_module = ctypes.CDLL('./find_cycle.so')
-
-c_count_cycles = cycle_module.graph_count_cycles
-c_count_cycles.argtypes = [ctypes.POINTER(ctypes.c_long),
-                           ctypes.c_long,
-                           ctypes.c_long,
-                           ctypes.c_long, 
-                           ctypes.POINTER(ctypes.c_long)]
-
-c_count_paths = cycle_module.graph_count_paths
-c_count_paths.argtypes = [ctypes.POINTER(ctypes.c_long),
-                          ctypes.c_long,
-                          ctypes.c_long,
-                          ctypes.c_long, 
-                          ctypes.POINTER(ctypes.c_long)]
-
-c_count_substruct = cycle_module.graph_count_substruct
-c_count_substruct.argtypes = [ctypes.POINTER(ctypes.c_long),
-                              ctypes.c_long,
-                              ctypes.c_long,
-                              ctypes.POINTER(ctypes.c_long),
-                              ctypes.c_char_p]
-
-#################################################################
-
 def count_cycles(edge_index: Union[np.ndarray, torch.LongTensor],
                  num_nodes: int, num_edges: int, k: int) -> np.ndarray:
     """
