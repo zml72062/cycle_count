@@ -1,8 +1,10 @@
 import ctypes
+import os
 
 ################### Definition for C interfaces ################
 
-cycle_module = ctypes.CDLL('./find_cycle.so')
+cycle_module = ctypes.CDLL(os.path.join(os.path.split(__file__)[0], 
+                                        'find_cycle.so'))
 
 c_count_cycles = cycle_module.graph_count_cycles
 c_count_cycles.argtypes = [ctypes.POINTER(ctypes.c_long),
