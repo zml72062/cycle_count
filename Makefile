@@ -1,7 +1,6 @@
-all: find_cycle.so
-
-find_cycle.so: find_cycle.c
+all:
 	gcc -o find_cycle.so -fPIC -shared -O2 find_cycle.c
+	cd ..; python3 cycle_count/setup.py install
 
 clean:
 	rm -f find_cycle.so
